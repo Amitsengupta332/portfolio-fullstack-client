@@ -1,45 +1,45 @@
-import { SxProps, TextField } from "@mui/material";
-import { Controller, useFormContext } from "react-hook-form";
-type TInputProps = {
-  name: string;
-  label?: string;
-  size?: "small" | "medium";
-  type?: string;
-  fullWidth?: boolean;
-  required?: boolean;
-  sx?: SxProps;
+import { ReactNode } from "react";
+import {
+  FieldValues,
+  FormProvider,
+  Resolver,
+  SubmitHandler,
+  useForm,
+} from "react-hook-form";
+type TFormConfig = {
+  resolver?: Resolver<FieldValues>;
+  defaultValues?: Record<string, any>;
 };
-const PFInput = ({
-  name,
-  label,
-  size = "small",
-  type = "text",
-  fullWidth,
-  required,
-  sx,
-}: TInputProps) => {
-  const { control } = useFormContext();
+type TFormProps = {
+  children: ReactNode;
+  onSubmit: SubmitHandler<FieldValues>;
+} & TFormConfig;
+
+const PFForm = ({
+  children,
+  onSubmit,
+  resolver,
+  defaultValues,
+}: TFormProps) => {
+  const formConfig: TFormConfig = {};
+  if (resolver) {
+    formConfig["resolver"] = resolver;
+  }
+  if (defaultValues) {
+    formConfig["defaultValues"] = defaultValues;
+  }
+
+  const methods = useForm(formConfig);
+  const { handleSubmit, reset } = methods;
+  const submit: SubmitHandler<FieldValues> = (data) => {
+    onSubmit(data);
+    reset();
+  };
   return (
-    <Controller
-      control={control}
-      name={name}
-      render={({ field, fieldState: { error } }) => (
-        <TextField
-          {...field}
-          sx={{ ...sx }}
-          label={label}
-          type={type}
-          variant="outlined"
-          size={size}
-          fullWidth={fullWidth}
-          required={required}
-          placeholder={label}
-          error={!!error?.message}
-          helperText={error?.message}
-        />
-      )}
-    />
+    <FormProvider {...methods}>
+      <form onSubmit={handleSubmit(submit)}>{children}</form>
+    </FormProvider>
   );
 };
 
-export default PFInput;
+export default PFForm;

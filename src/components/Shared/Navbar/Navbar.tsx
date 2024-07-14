@@ -17,13 +17,13 @@ import { useState } from "react";
 import MenuIcon from "@mui/icons-material/Menu";
 const pages = [
   { name: "Home", link: "/" },
-  { name: "About", link: "/about" },
+  { name: "Skills", link: "/skills" },
   { name: "Projects", link: "/projects" },
   { name: "Blog", link: "/blog" },
   { name: "Contact", link: "/contact" },
   { name: "Login", link: "/login" },
 ];
-
+// borderBottom: "2px solid #F5F5F5",
 const Navbar = () => {
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [isOpen, setIsOpen] = useState(false);
@@ -43,7 +43,7 @@ const Navbar = () => {
       position="static"
       sx={{
         bgcolor: "secondary.main",
-        borderBottom: "2px solid #F5F5F5",
+        borderBottom: "none",
       }}
     >
       <Container>
@@ -61,7 +61,7 @@ const Navbar = () => {
                 textDecoration: "none",
               }}
             >
-              Jobayar
+              Amit
             </Typography>
           </Stack>
 
