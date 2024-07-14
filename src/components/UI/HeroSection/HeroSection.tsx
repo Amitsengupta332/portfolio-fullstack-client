@@ -19,7 +19,7 @@ const HeroSection = () => {
   };
 
   return (
-    <Box sx={{ backgroundColor: "#f5f5f5", py: 5 }}>
+    <Box sx={{ backgroundColor: "#DBE6F0", py: 5 }}>
       <Container>
         <Box
           display="flex"
