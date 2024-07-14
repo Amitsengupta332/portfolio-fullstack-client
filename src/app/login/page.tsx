@@ -1,14 +1,52 @@
 "use client";
 import PFForm from "@/components/Form/PFForm";
 import PFInput from "@/components/Form/PFInput";
+import { userLogin } from "@/services/actions/userLogin";
+import { storeUserInfo } from "@/services/authService";
 import { Box, Button, Container, Grid, Stack, Typography } from "@mui/material";
 import React, { useState } from "react";
 import { FieldValues } from "react-hook-form";
+import { toast } from "sonner";
 
 const LoginLoginPage = () => {
-  const [error, setError] = useState<string | undefined>();
+  const [error, setError] = useState("");
 
-  const handleLogin = async (values: FieldValues) => {};
+  const handleLogin = async (values: FieldValues) => {
+    console.log(values);
+    try {
+      const res = await userLogin(values);
+      console.log({ res });
+      if (res?.data?.accessToken) {
+        toast.success(res?.message);
+        storeUserInfo({ accessToken: res?.data?.accessToken });
+        toast.success(res.message);
+        // router.push("/");
+      } else {
+        setError(res?.message);
+        toast.error(res?.message);
+      }
+    } catch (error: any) {
+      console.error(error.message);
+    }
+  };
+
+  // const handleLogin = async (values: FieldValues) => {
+  //   try {
+  //     const res = await userLogin(values);
+  //     console.log(res);
+  //     if (res?.data?.token) {
+  //       storeUserInfo(res?.data?.token);
+  //       toast.success(res.message);
+  //     } else {
+  //       setError(res.message);
+  //       toast.error(res?.message ? res?.message : "Something went wrong");
+  //     }
+  //   } catch (error: any) {
+  //     console.log(error.message);
+  //     setError(error.message);
+  //     toast.error("Something went wrong");
+  //   }
+  // };
   return (
     <Container>
       <Stack
