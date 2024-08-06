@@ -2,8 +2,9 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { AppRouterCacheProvider } from "@mui/material-nextjs/v13-appRouter";
-import Provider from "@/lib/provider/Provider";
+
 import { Toaster } from "sonner";
+import Providers from "@/lib/provider/Provider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -18,7 +19,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <Provider>
+    <Providers>
       <html lang="en">
         <body>
           <>
@@ -29,6 +30,6 @@ export default function RootLayout({
           </>
         </body>
       </html>
-    </Provider>
+    </Providers>
   );
 }

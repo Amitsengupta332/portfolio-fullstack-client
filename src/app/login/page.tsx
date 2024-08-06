@@ -2,7 +2,7 @@
 import PFForm from "@/components/Form/PFForm";
 import PFInput from "@/components/Form/PFInput";
 import { userLogin } from "@/services/actions/userLogin";
-import { storeUserInfo } from "@/services/authService";
+// import { storeUserInfo } from "@/services/authService";
 import { Box, Button, Container, Grid, Stack, Typography } from "@mui/material";
 import React, { useState } from "react";
 import { FieldValues } from "react-hook-form";
@@ -18,7 +18,7 @@ const LoginLoginPage = () => {
       console.log({ res });
       if (res?.data?.accessToken) {
         toast.success(res?.message);
-        storeUserInfo({ accessToken: res?.data?.accessToken });
+        // storeUserInfo({ accessToken: res?.data?.accessToken });
         toast.success(res.message);
         // router.push("/");
       } else {
