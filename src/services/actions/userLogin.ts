@@ -13,10 +13,11 @@ export const userLogin = async (data: FieldValues) => {
   });
 
   const userInfo = await res.json();
-
-  // if (userInfo.data.accessToken) {
-  //   setAccessToken(userInfo.data.accessToken, { redirect: "/dashboard" });
-  // }
+  console.log(userInfo);
+  if (userInfo.data.token) {
+    console.log("con");
+    setAccessToken(userInfo.data.token, { redirect: "/dashboard" });
+  }
 
   return userInfo;
 };

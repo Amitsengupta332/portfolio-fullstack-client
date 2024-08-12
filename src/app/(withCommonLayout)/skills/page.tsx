@@ -62,6 +62,7 @@ const Skills = () => {
               {skillCategory.items.map((skill) => (
                 <Box mt={5} key={skill.name}>
                   <Typography>{skill.name}</Typography>
+
                   <Box display="flex" alignItems="center">
                     <Typography
                       className="progress-label"

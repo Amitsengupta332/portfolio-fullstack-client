@@ -48,7 +48,7 @@ const LoginLoginPage = () => {
   //   }
   // };
   return (
-    <Container>
+    <Box sx={{ bgcolor: "#DBE6F0" }}>
       <Stack
         sx={{
           height: "100vh",
@@ -130,7 +130,7 @@ const LoginLoginPage = () => {
           </Box>
         </Box>
       </Stack>
-    </Container>
+    </Box>
   );
 };
 

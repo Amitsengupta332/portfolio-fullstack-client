@@ -6,13 +6,30 @@ import { Box, Button, Container, Grid, Typography } from "@mui/material";
 import React from "react";
 import { FieldValues } from "react-hook-form";
 import PFQuill from "@/components/Form/PFQuil";
+import { toast } from "sonner";
+import { imageHosting } from "@/utils/imageHosting";
+import { createBlogs } from "@/services/actions/createBlog";
 
 const CreateBlog = () => {
-  const handleCreateBlog = async (data: FieldValues) => {};
+  const handleCreateBlog = async (data: FieldValues) => {
+    try {
+      const image = await imageHosting(data.photo);
+      console.log(image);
+
+      const res = await createBlogs({ ...data, photo: image });
+      console.log(res);
+      if (res?.data?.id) {
+        console.log(res.data);
+        toast.success("Blog created successfully");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <Box>
-      <Box bgcolor={"#FDF8F7"}>
+      <Box>
         <Container>
           <Box py={10}>
             <Typography variant="h4" fontWeight={700}>
@@ -27,7 +44,14 @@ const CreateBlog = () => {
       <Container>
         <Box my={7}>
           <Box>
-            <PFForm onSubmit={handleCreateBlog}>
+            <PFForm
+              onSubmit={handleCreateBlog}
+              defaultValues={{
+                title: "",
+                content: "",
+                photo: "",
+              }}
+            >
               <Grid container spacing={4} my={1}>
                 <Grid item md={6}>
                   <PFInput name="title" fullWidth label="Title" size="small" />

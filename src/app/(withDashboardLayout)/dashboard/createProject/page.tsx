@@ -1,12 +1,28 @@
 "use client";
 import PFForm from "@/components/Form/PFForm";
 import PFInput from "@/components/Form/PFInput";
+import { useCreateProjectMutation } from "@/redux/api/projectApi";
 import { Box, Button, Container, Grid, Typography } from "@mui/material";
 import React from "react";
 import { FieldValues } from "react-hook-form";
+import { toast } from "sonner";
 
 const CreateAdmin = () => {
-  const handleCreateProject = async (data: FieldValues) => {};
+  const [createProject] = useCreateProjectMutation();
+  const handleCreateProject = async (data: FieldValues) => {
+    console.log(data);
+    try {
+      const res = await createProject({ data });
+      if (res?.data?.id) {
+        toast.success("Created Project", {
+          duration: 2000,
+          position: "top-center",
+        });
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
     <Box>
       <Box bgcolor={"#FDF8F7"}>
@@ -29,7 +45,7 @@ const CreateAdmin = () => {
                 </Grid>
                 <Grid item md={6}>
                   <PFInput
-                    name="githubClient"
+                    name="frontEndRepo"
                     fullWidth
                     label="GitHub Client Repo"
                     size="small"
@@ -37,7 +53,7 @@ const CreateAdmin = () => {
                 </Grid>
                 <Grid item md={6}>
                   <PFInput
-                    name="githubServer"
+                    name="backEndRepo"
                     fullWidth
                     label="GitHub Server Repo"
                     size="small"
@@ -52,9 +68,26 @@ const CreateAdmin = () => {
                   />
                 </Grid>
 
+                <Grid item md={6}>
+                  <PFInput
+                    name="images"
+                    fullWidth
+                    label="Images"
+                    size="small"
+                  />
+                </Grid>
+                <Grid item md={6}>
+                  <PFInput
+                    name="technologyUsed"
+                    fullWidth
+                    label="Technology"
+                    size="small"
+                  />
+                </Grid>
+
                 <Grid item md={12}>
                   <PFInput
-                    name="description"
+                    name="shortDescription"
                     fullWidth
                     label="Description"
                     size="small"

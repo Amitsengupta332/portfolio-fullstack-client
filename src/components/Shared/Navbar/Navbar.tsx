@@ -42,7 +42,7 @@ const Navbar = () => {
     <AppBar
       position="static"
       sx={{
-        bgcolor: "secondary.main",
+        backgroundColor: "#DBE6F0",
         borderBottom: "none",
       }}
     >

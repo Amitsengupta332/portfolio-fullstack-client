@@ -38,6 +38,7 @@ const Contact = () => {
       justifyContent="center"
       alignItems="center"
       minHeight="100vh"
+      bgcolor="#DBE6F0"
     >
       {/*     onSubmit={sendEmail} */}
       {/* <ToastContainer /> */}
