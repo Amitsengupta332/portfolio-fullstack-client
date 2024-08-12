@@ -1,31 +1,16 @@
 "use client";
 import PFForm from "@/components/Form/PFForm";
-import PFImage from "@/components/Form/PFImage";
+
 import PFInput from "@/components/Form/PFInput";
 import { Box, Button, Container, Grid, Typography } from "@mui/material";
 import React from "react";
 import { FieldValues } from "react-hook-form";
-import PFQuill from "@/components/Form/PFQuil";
+
 import { toast } from "sonner";
 import { imageHosting } from "@/utils/imageHosting";
-import { createBlogs } from "@/services/actions/createBlog";
 
 const CreateBlog = () => {
-  const handleCreateBlog = async (data: FieldValues) => {
-    try {
-      const image = await imageHosting(data.photo);
-      console.log(image);
-
-      const res = await createBlogs({ ...data, photo: image });
-      console.log(res);
-      if (res?.data?.id) {
-        console.log(res.data);
-        toast.success("Blog created successfully");
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  const handleCreateBlog = async (data: FieldValues) => {};
 
   return (
     <Box>
@@ -57,12 +42,12 @@ const CreateBlog = () => {
                   <PFInput name="title" fullWidth label="Title" size="small" />
                 </Grid>
 
-                <Grid item md={6}>
+                {/* <Grid item md={6}>
                   <PFImage name="photo" />
                 </Grid>
                 <Grid item md={12}>
                   <PFQuill name="content" />
-                </Grid>
+                </Grid> */}
               </Grid>
 
               <Button
